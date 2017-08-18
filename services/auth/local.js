@@ -23,7 +23,7 @@ passport.use(
             console.log(err);
             return done(err);
         });
-    });
+    })
 );
 
 module.exports = passport;

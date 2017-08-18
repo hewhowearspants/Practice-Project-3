@@ -1,6 +1,6 @@
 const db = require('../db/config');
 
-const user = {};
+const User = {};
 
 User.findByUserName = userName => {
     return db.oneOrNote(`
