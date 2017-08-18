@@ -10,9 +10,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "proxy": "http://localhost:3001/",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }
