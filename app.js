@@ -39,11 +39,11 @@ app.listen(PORT, () => {
  app.use('/auth', authRoutes);
  const userRoutes = require('./routes/user-routes');
  app.use('/user', userRoutes);
-// const movieRoutes = require('./routes/movie-routes');
-// app.use('/movies', movieRoutes);
-//
-// app.use('*', (req, res) => {
-//   res.status(400).json({
-//     message: 'Not found!',
-//   });
-// });
+ const movieRoutes = require('./routes/movie-routes');
+ app.use('/movies', movieRoutes);
+
+ app.use('*', (req, res) => {
+    res.status(400).json({
+      message: 'Not found!',
+    });
+});
