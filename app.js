@@ -27,7 +27,7 @@ app.use(passport.session());
 
 app.use(express.static('public'));
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`~~~Dream~~~Team~~~ up in here running on dat port ${PORT}`);
 });
