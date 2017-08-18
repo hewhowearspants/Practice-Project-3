@@ -46,7 +46,7 @@ movieController.update=(req,res)=>{
         genre:req.body.genre,
     },req.params.id)
     .then(movie=>{
-        res.redirect(`/movies/${req.prarams.id}`)
+        res.redirect(`/movies/${req.params.id}`)
     })
     .catch(err=>{
         console.log(err);
