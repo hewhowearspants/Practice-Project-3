@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
     return (
         <footer>
-            Created By CRW
+            Created By CRW & RDE
         </footer>
     )
 }
