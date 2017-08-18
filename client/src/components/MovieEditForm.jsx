@@ -22,7 +22,7 @@ class MovieEditForm extends Component {
   render() {
     return (
       <div className='edit'>
-        <form onSubmit={(event) => this.props.handleMovieSubmit(event, this.state.title, this.state.description, this.state.genre)}>
+        <form onSubmit={(event) => this.props.handleMovieEditSubmit(event, this.state.title, this.state.description, this.state.genre)}>
           <label> TITLE
             <input type='text' name='title' placeholder='Title' value={this.state.title} onChange={this.handleInputChange} />
           </label>
