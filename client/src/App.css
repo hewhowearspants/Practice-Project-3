@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align:left;
 }
 
 .App-logo {
@@ -21,4 +21,101 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+header {
+  background:#2F3030;
+  padding:10px;
+  display:flex;
+  justify-content: space-between;
+}
+
+nav {
+  justify-content: flex-end;
+}
+
+li {
+  display: -webkit-inline-flex;
+  padding:15px;
+  font-family:baskerville;
+  letter-spacing: 0.05em;
+  font-size:20px;
+  color:white;
+}
+
+li:hover {
+  color:#64B3D1;
+  cursor: pointer;
+}
+
+.logo {
+  color:white;
+  font-size:36px;
+  margin-right:30px;
+  font-family:baskerville;
+  margin-top:20px;
+  margin-left:20px;
+}
+
+.movies-container {
+  width:80%;
+  margin: 0 auto;
+}
+
+.movie{
+  border:2px solid #dedede;
+  margin-top:30px;
+  padding:0px 0px 30px 30px;
+  width:60%;
+  float:right;
+}
+
+.movie h3{
+  font-family:baskerville;
+  font-size:40px;
+  color:#303E63;
+  margin-bottom:-10px;
+}
+
+.movie p {
+  font-family: 'Oxygen', sans-serif;
+  font-size:22px;
+  letter-spacing: 0.05em;
+  line-height: 1.3em;
+}
+
+.movie span{
+  border: 2px solid #dedede;
+  padding:8px 25px;
+  font-family: 'Oxygen', sans-serif;
+  font-size:18px;
+  float:right;
+  margin-top:-30px;
+  margin-right:50px;
+}
+
+.movie span:hover{
+  background: #bdbdbd;
+  border: 2px solid #bdbdbd;
+  color:#303E63;
+}
+
+footer {
+  background:#2F3030;
+  display:flex;
+  flex: 1;
+  color:white;
+  width: 100%;
+  text-align: center;
+  padding:20px;
+}
+
+.add {
+  width: 400px;
+  background:red;
+}
+
+.add label{
+  font-family: baskerville;
+  font-size:28px;
 }
