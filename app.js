@@ -16,7 +16,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(
   session({
-    secret:'supersecret'
+    key: process.env.SECRET_KEY,
+    secret: process.env.SECRET_KEY,
+    resave: false,
+    saveUninitialized: true,
   })
 );
 app.use(passport.initialize());
