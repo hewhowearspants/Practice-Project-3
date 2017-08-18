@@ -1,5 +1,5 @@
 const express = require('express');
-const logger = require('moregan');
+const logger = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -20,7 +20,7 @@ app.use(
     secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true,
-  });
+  })
 );
 app.use(passport.initialize());
 app.use(passport.session());
@@ -32,11 +32,13 @@ app.listen(PORT, () => {
   console.log(`~~~Dream~~~Team~~~ up in here running on dat port ${PORT}`);
 });
 
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-// });
-// const authRoutes = require('./routes/auth=routes');
-// app.use('/auth', authRoutes);
+ app.get('/', (req, res) => {
+   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+ });
+ const authRoutes = require('./routes/auth-routes');
+ app.use('/auth', authRoutes);
+ const userRoutes = require('./routes/user-routes');
+ app.use('/user', userRoutes);
 // const movieRoutes = require('./routes/movie-routes');
 // app.use('/movies', movieRoutes);
 //
