@@ -11,4 +11,4 @@ const Movie = (props) => {
   )
 }
 
-export default React;
+export default Movie;
