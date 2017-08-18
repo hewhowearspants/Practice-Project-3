@@ -19,6 +19,7 @@ class App extends Component {
       currentPage: 'home',
       currentMovieId: null,
       movieData: null,
+      movieDataLoaded: false,
     }
     this.setPage = this.setPage.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
@@ -33,7 +34,8 @@ class App extends Component {
     axios.get('/movies')
       .then((res) => {
         this.setState({
-          movieData: res.data.data,
+          movieData: res.data,
+          movieDataLoaded: true,
         });
       }).catch(err => console.log(err));
   }
@@ -60,13 +62,15 @@ class App extends Component {
           return <Register handleRegisterSubmit={this.handleRegisterSubmit} />;
         } else return <Home />;
       case ('movies'):
-        return (<MoviesList 
+        if (this.state.movieDataLoaded) {
+          return (<MoviesList 
                   movieData={this.state.movieData} 
                   handleMovieSubmit={this.handleMovieSubmit}
                   handleMovieEditSubmit={this.handleMovieEditSubmit} 
                   selectEditedMovie={this.selectEditedMovie}
                   currentMovieId={this.state.currentMovieId}
-                />)
+          />)
+        } else return <Home />;
         break;
       default:
         break;
