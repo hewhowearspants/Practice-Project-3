@@ -51,35 +51,35 @@ class App extends Component {
     })
   }
 
-  decideWhichPage() {
-    switch(this.state.currentPage) {
-      case ('home'):
-        return <Home />;
-        break;
-      case 'login':
-        if (!this.state.auth) {
-          return <Login handleLoginSubmit={this.handleLoginSubmit} />;
-        } else return <Home />;
-        break;
-      case 'register':
-        if (!this.state.auth) {
-          return <Register handleRegisterSubmit={this.handleRegisterSubmit} />;
-        } else return <Home />;
-      case ('movies'):
-        if (this.state.movieDataLoaded) {
-          return (<MoviesList 
-                  movieData={this.state.movieData} 
-                  handleMovieSubmit={this.handleMovieSubmit}
-                  handleMovieEditSubmit={this.handleMovieEditSubmit} 
-                  selectEditedMovie={this.selectEditedMovie}
-                  currentMovieId={this.state.currentMovieId}
-          />)
-        } else return <Home />;
-        break;
-      default:
-        break;
-    }
-  }
+  // decideWhichPage() {
+  //   switch(this.state.currentPage) {
+  //     case ('home'):
+  //       return <Home />;
+  //       break;
+  //     case 'login':
+  //       if (!this.state.auth) {
+  //         return <Login handleLoginSubmit={this.handleLoginSubmit} />;
+  //       } else return <Home />;
+  //       break;
+  //     case 'register':
+  //       if (!this.state.auth) {
+  //         return <Register handleRegisterSubmit={this.handleRegisterSubmit} />;
+  //       } else return <Home />;
+  //     case ('movies'):
+  //       if (this.state.movieDataLoaded) {
+  //         return (<MoviesList 
+  //                 movieData={this.state.movieData} 
+  //                 handleMovieSubmit={this.handleMovieSubmit}
+  //                 handleMovieEditSubmit={this.handleMovieEditSubmit} 
+  //                 selectEditedMovie={this.selectEditedMovie}
+  //                 currentMovieId={this.state.currentMovieId}
+  //         />)
+  //       } else return <Home />;
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }
 
   handleLoginSubmit(e, username, password) {
     e.preventDefault();
@@ -167,13 +167,19 @@ class App extends Component {
           <Route exact path='/' component={ Home } />
           <Route exact path='/login' render={() => <Login handleLoginSubmit={this.handleLoginSubmit} />} />
           <Route exact path='/register' render={() => <Register handleRegisterSubmit={this.handleRegisterSubmit} />} />
-          <Route exact path='/movies' render={() => <MoviesList 
-                                                        movieData={this.state.movieData} 
-                                                        handleMovieSubmit={this.handleMovieSubmit}
-                                                        handleMovieEditSubmit={this.handleMovieEditSubmit} 
-                                                        selectEditedMovie={this.selectEditedMovie}
-                                                        currentMovieId={this.state.currentMovieId}/>} 
-          />
+          <Route exact path='/movies' render={() => {
+              if (this.state.movieDataLoaded) {
+                return (
+                  <MoviesList 
+                  movieData={this.state.movieData} 
+                  handleMovieSubmit={this.handleMovieSubmit}
+                  handleMovieEditSubmit={this.handleMovieEditSubmit} 
+                  selectEditedMovie={this.selectEditedMovie}
+                  currentMovieId={this.state.currentMovieId}/>
+                )
+              } else return <h1>Loading</h1>
+            } 
+          }/>
         {/* {this.decideWhichPage()} */}
         </main>
         <Footer />
