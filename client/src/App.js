@@ -156,11 +156,25 @@ class App extends Component {
 
   render() {
     return (
+      <Router>
       <div className="App">
         <Header setPage={this.setPage} logOut={this.logOut} />
-        {this.decideWhichPage()}
+        <main>
+          <Route exact path='/' component={ Home } />
+          <Route exact path='/login' render={() => <Login handleLoginSubmit={this.handleLoginSubmit} />} />
+          <Route exact path='/register' render={() => <Register handleRegisterSubmit={this.handleRegisterSubmit} />} />
+          <Route exact path='/movies' render={() => <MoviesList 
+                                                        movieData={this.state.movieData} 
+                                                        handleMovieSubmit={this.handleMovieSubmit}
+                                                        handleMovieEditSubmit={this.handleMovieEditSubmit} 
+                                                        selectEditedMovie={this.selectEditedMovie}
+                                                        currentMovieId={this.state.currentMovieId}/>} 
+          />
+        {/* {this.decideWhichPage()} */}
+        </main>
         <Footer />
       </div>
+      </Router>
     );
   }
 }
