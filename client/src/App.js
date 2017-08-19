@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+} from 'react-router-dom'
 
 import './App.css';
 
@@ -20,6 +25,7 @@ class App extends Component {
       currentMovieId: null,
       movieData: null,
       movieDataLoaded: false,
+      fireRedirect: false,
     }
     this.setPage = this.setPage.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
@@ -47,46 +53,18 @@ class App extends Component {
     })
   }
 
-  decideWhichPage() {
-    switch(this.state.currentPage) {
-      case ('home'):
-        return <Home />;
-        break;
-      case 'login':
-        if (!this.state.auth) {
-          return <Login handleLoginSubmit={this.handleLoginSubmit} />;
-        } else return <Home />;
-        break;
-      case 'register':
-        if (!this.state.auth) {
-          return <Register handleRegisterSubmit={this.handleRegisterSubmit} />;
-        } else return <Home />;
-      case ('movies'):
-        if (this.state.movieDataLoaded) {
-          return (<MoviesList 
-                  movieData={this.state.movieData} 
-                  handleMovieSubmit={this.handleMovieSubmit}
-                  handleMovieEditSubmit={this.handleMovieEditSubmit} 
-                  selectEditedMovie={this.selectEditedMovie}
-                  currentMovieId={this.state.currentMovieId}
-          />)
-        } else return <Home />;
-        break;
-      default:
-        break;
-    }
-  }
-
   handleLoginSubmit(e, username, password) {
     e.preventDefault();
     axios.post('/auth/login', {
       username,
       password,
     }).then(res => {
+      console.log(res.data.user);
       this.setState({
         auth: res.data.auth,
         user: res.data.user,
         currentPage: 'home',
+        fireRedirect: true,
       });
     }).catch(err => console.log(err));
   }
@@ -102,6 +80,7 @@ class App extends Component {
         auth: res.data.auth,
         user: res.data.user,
         currentPage: 'home',
+        fireRedirect: true,
       });
     }).catch(err => console.log(err));
   }
@@ -125,6 +104,10 @@ class App extends Component {
       genre,
     }).then((res) => {
       this.resetMovies();
+    }).then(() => {
+      this.setState({
+        fireRedirect: true,
+      })
     }).catch((err) => { console.log(err) });
   }
 
@@ -136,6 +119,10 @@ class App extends Component {
       genre,
     }).then((res) => {
       this.resetMovies();
+    }).then(() => {
+      this.setState({
+        fireRedirect: true,
+      })
     }).catch((err) => { console.log(err) });
   }
 
@@ -150,17 +137,39 @@ class App extends Component {
       .then((res) => {
         this.setState({
           movieData: res.data,
+          currentMovieId: null,
         })
       }).catch((err) => { console.log(err) });
   }
 
   render() {
     return (
+      <Router>
       <div className="App">
         <Header setPage={this.setPage} logOut={this.logOut} />
-        {this.decideWhichPage()}
+        <main>
+          <Route exact path='/' component={ Home } />
+          <Route exact path='/login' render={() => <Login handleLoginSubmit={this.handleLoginSubmit} />} />
+          <Route exact path='/register' render={() => <Register handleRegisterSubmit={this.handleRegisterSubmit} />} />
+          <Route exact path='/movies' render={() => {
+              if (this.state.movieDataLoaded) {
+                return (
+                  <MoviesList 
+                  movieData={this.state.movieData} 
+                  handleMovieSubmit={this.handleMovieSubmit}
+                  handleMovieEditSubmit={this.handleMovieEditSubmit} 
+                  selectEditedMovie={this.selectEditedMovie}
+                  currentMovieId={this.state.currentMovieId}/>
+                )
+              } else return <h1>Loading</h1>
+            } 
+          }/>
+          {this.state.fireRedirect ? <Redirect push to={'/movies'} /> : '' }
+        {/* {this.decideWhichPage()} */}
+        </main>
         <Footer />
       </div>
+      </Router>
     );
   }
 }
