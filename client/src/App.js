@@ -3,6 +3,7 @@ import axios from 'axios';
 import {
   BrowserRouter as Router,
   Route,
+  Redirect,
 } from 'react-router-dom'
 
 import './App.css';
