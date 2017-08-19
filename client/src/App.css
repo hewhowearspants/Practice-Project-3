@@ -1,5 +1,8 @@
 .App {
   text-align:left;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 .App-logo {
@@ -14,18 +17,37 @@
   color: white;
 }
 
+.home {
+  justify-content: center;
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 50%; top: 50%;
+  align-items: center;
+  text-align: center;
+  font-size: 2em;
+}
+
+body {
+}
+
 .App-intro {
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+footer {
+  flex-direction: column;
+  flex: 1;
+  border-top: 3px solid black;
+  margin-top: 10vh;
+  font-size: 1.5em;
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
 }
 
 header {
   background:#2F3030;
   padding:10px;
+  flex: 1;
   display:flex;
   justify-content: space-between;
 }
@@ -46,6 +68,7 @@ li {
 li:hover {
   color:#64B3D1;
   cursor: pointer;
+  transition: ease-in-out, .3s ease-in-out;
 }
 
 .logo {
@@ -58,8 +81,20 @@ li:hover {
 }
 
 .movies-container {
-  width:80%;
+  max-width:80%;
+  min-width: 80%;
   margin: 0 auto;
+  overflow: auto;
+  text-align: left;
+}
+
+.movies-list {
+  overflow: auto;
+  padding-top: 5vh;
+  left: 50%;
+  right: 50%;
+  height: 60vh;
+  text-align: left;
 }
 
 .movie{
@@ -67,7 +102,6 @@ li:hover {
   margin-top:30px;
   padding:0px 0px 30px 30px;
   width:60%;
-  float:right;
 }
 
 .movie h3{
@@ -105,17 +139,87 @@ footer {
   display:flex;
   flex: 1;
   color:white;
-  width: 100%;
   text-align: center;
   padding:20px;
 }
 
 .add {
-  width: 400px;
-  background:red;
+  background:#59B1DE;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  text-align: center;
+  width: 34vw;
+  height: 20vh;
+  border: 3px solid black;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding-bottom: 20px;
+  align-items: center;
+}
+
+.add-input {
+display: flex;
+align-items: center;
+flex-direction: column;
+justify-content: center;
+justify-content: space-around;
+padding-top: 10px;
+letter-spacing: 4px;
+text-align: center;
+}
+
+.add input {
+  display: flex;
+  text-align: center;
+  border-radius: 4px;
+
+}
+
+.add form input[type=submit] {
+  background-color: inherit;
+  border: 3px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  height: 4vh;
+  justify-content: center;
+  margin-top: 20px;
+  font-size: 1.5em;
+  color: black;
+  font-weight: 900;
+}
+
+
+.add form input[type=text] {
+  background-color: white;
+  border: 3px solid black;
+  letter-spacing: 2px;
+  height: 2.5vh;
+  font-size: 20px;
+  color: #65F1B5;
+  font-weight: 600;
+  transition: ease-in-out, .3s ease-in-out;
+}
+
+.add input:hover {
+  transition: ease-in-out, .3s ease-in-out;
+  cursor: pointer;
+}
+
+
+input:focus {
+  outline-color: black;
+  transition: ease-in-out, .3s ease-in-out;
 }
 
 .add label{
   font-family: baskerville;
-  font-size:28px;
+  font-size: 2em;
+  font-weight: 500;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
