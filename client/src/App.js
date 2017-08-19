@@ -25,6 +25,7 @@ class App extends Component {
       currentMovieId: null,
       movieData: null,
       movieDataLoaded: false,
+      fireRedirect: false,
     }
     this.setPage = this.setPage.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
@@ -52,46 +53,18 @@ class App extends Component {
     })
   }
 
-  // decideWhichPage() {
-  //   switch(this.state.currentPage) {
-  //     case ('home'):
-  //       return <Home />;
-  //       break;
-  //     case 'login':
-  //       if (!this.state.auth) {
-  //         return <Login handleLoginSubmit={this.handleLoginSubmit} />;
-  //       } else return <Home />;
-  //       break;
-  //     case 'register':
-  //       if (!this.state.auth) {
-  //         return <Register handleRegisterSubmit={this.handleRegisterSubmit} />;
-  //       } else return <Home />;
-  //     case ('movies'):
-  //       if (this.state.movieDataLoaded) {
-  //         return (<MoviesList 
-  //                 movieData={this.state.movieData} 
-  //                 handleMovieSubmit={this.handleMovieSubmit}
-  //                 handleMovieEditSubmit={this.handleMovieEditSubmit} 
-  //                 selectEditedMovie={this.selectEditedMovie}
-  //                 currentMovieId={this.state.currentMovieId}
-  //         />)
-  //       } else return <Home />;
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // }
-
   handleLoginSubmit(e, username, password) {
     e.preventDefault();
     axios.post('/auth/login', {
       username,
       password,
     }).then(res => {
+      console.log(res.data.user);
       this.setState({
         auth: res.data.auth,
         user: res.data.user,
         currentPage: 'home',
+        fireRedirect: true,
       });
     }).catch(err => console.log(err));
   }
@@ -107,6 +80,7 @@ class App extends Component {
         auth: res.data.auth,
         user: res.data.user,
         currentPage: 'home',
+        fireRedirect: true,
       });
     }).catch(err => console.log(err));
   }
@@ -130,6 +104,10 @@ class App extends Component {
       genre,
     }).then((res) => {
       this.resetMovies();
+    }).then(() => {
+      this.setState({
+        fireRedirect: true,
+      })
     }).catch((err) => { console.log(err) });
   }
 
@@ -141,6 +119,10 @@ class App extends Component {
       genre,
     }).then((res) => {
       this.resetMovies();
+    }).then(() => {
+      this.setState({
+        fireRedirect: true,
+      })
     }).catch((err) => { console.log(err) });
   }
 
@@ -155,6 +137,7 @@ class App extends Component {
       .then((res) => {
         this.setState({
           movieData: res.data,
+          currentMovieId: null,
         })
       }).catch((err) => { console.log(err) });
   }
@@ -181,6 +164,7 @@ class App extends Component {
               } else return <h1>Loading</h1>
             } 
           }/>
+          {this.state.fireRedirect ? <Redirect push to={'/movies'} /> : '' }
         {/* {this.decideWhichPage()} */}
         </main>
         <Footer />
