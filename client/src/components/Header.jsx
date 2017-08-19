@@ -7,11 +7,11 @@ const Header = (props) => {
             <div className="logo">Awesome Movie App</div>
             <nav>
                 <ul>
-                    <li onClick={() => props.setPage('home')}>Home</li>
-                    <li onClick={() => props.setPage('movies')}>Movies</li>
-                    <li onClick={() => props.setPage('login')}>Log In</li>
-                    <li onClick={() => props.setPage('register')}>Register</li>
-                    <li onClick={() => props.setPage('user')}>User Dashboard</li>
+                    <li><Link to='/'>Home</Link></li>
+                    <li><Link to='/movies'>Movies</Link></li>
+                    <li><Link to='/login'>Log In</Link></li>
+                    <li><Link to ='/register'>Register</Link></li>
+                    <li><Link to='/user'>User Dashboard</Link></li>
                     <li onClick={props.logOut}>Logout</li>
                 </ul>
             </nav>
