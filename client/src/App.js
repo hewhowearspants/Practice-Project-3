@@ -149,7 +149,7 @@ class App extends Component {
     axios.get('/movies')
       .then((res) => {
         this.setState({
-          movieData: res.data.data,
+          movieData: res.data,
         })
       }).catch((err) => { console.log(err) });
   }
