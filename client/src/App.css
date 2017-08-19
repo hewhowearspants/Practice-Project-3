@@ -21,14 +21,60 @@
   justify-content: center;
   position: absolute;
   left: 0; right: 0;
-  bottom: 50%; top: 50%;
+  margin-top: 20vh;
   align-items: center;
   text-align: center;
   font-size: 2em;
 }
 
-body {
+
+.login-container form {
+  margin-top: 200px;
 }
+
+.login-container {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.login-container form input[type=text], .login-container  form input[type=password], .login-container form input[type=submit], .login-container form input[type=email] {
+  font-size: 1.7em;
+  transition: ease-in-out, .35s ease-in-out;
+  margin: 10px;
+  background-color: #222;
+  border: solid 4px #64B3D1;
+  border-radius: 10px;
+  width: 50vw;
+  display: inline-block;
+  text-align: center;
+  height: 5vh;
+  color: white;
+},
+
+input:focus {
+  outline: 0;
+}
+
+select:focus {
+  outline: 0;
+}
+
+.login-container form input:hover  {
+  background-color: rgba(255 , 255, 255, .9);
+  cursor: pointer;
+  transition: ease-in-out, .35s ease-in-out;
+  color: black;
+  border-color: inherit;
+}
+
+.login-container form input[type=submit] {
+  height: 5.5vh;
+  width: 55%;
+}
+
+
 
 .App-intro {
   font-size: large;
@@ -202,16 +248,6 @@ text-align: center;
   transition: ease-in-out, .3s ease-in-out;
 }
 
-.add input:hover {
-  transition: ease-in-out, .3s ease-in-out;
-  cursor: pointer;
-}
-
-
-input:focus {
-  outline-color: black;
-  transition: ease-in-out, .3s ease-in-out;
-}
 
 .add label{
   font-family: baskerville;
