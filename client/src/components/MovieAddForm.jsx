@@ -23,6 +23,7 @@ class MovieAddForm extends Component {
     return (
       <div className='add'>
         <form onSubmit={(event) => this.props.handleMovieSubmit(event, this.state.title, this.state.description, this.state.genre)}>
+        <div className='add-input'>
           <label> TITLE
             <input type='text' name='title' placeholder='Title' value={this.state.title} onChange={this.handleInputChange} />
           </label>
@@ -33,6 +34,7 @@ class MovieAddForm extends Component {
             <input type='text' name='genre' placeholder='Genre' value={this.state.genre} onChange={this.handleInputChange} />
           </label>
           <input type='submit' value='Add Movie' />
+          </div>
         </form>
       </div>
     )
