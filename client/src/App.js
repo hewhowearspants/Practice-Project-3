@@ -39,6 +39,7 @@ class App extends Component {
   componentDidMount() {
     axios.get('/movies')
       .then((res) => {
+        console.log(res.data)
         this.setState({
           movieData: res.data,
           movieDataLoaded: true,

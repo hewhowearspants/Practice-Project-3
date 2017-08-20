@@ -40,6 +40,22 @@ Movie.destroy=(id)=>{
     `,[id]);
 }
 
+
+Movie.showMovieComments=movieid=>{
+    return db.query(`
+    SELECT * FROM comments
+    WHERE movie_id=$1
+    `,[movieid]);
+}
+
+Movie.createComment=(comment,username,movieid)=>{
+    return db.one(`
+    INSERT INTO comments
+    (text,user_name,movie_id)
+    VALUES($1,$2,$3)
+    RETURNING *
+    `,[comment.text,username,movieid]);
+
 Movie.addFavorite = (movieId, userId) => {
     return db.one(`
         INSERT INTO favorites
