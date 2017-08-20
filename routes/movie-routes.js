@@ -11,4 +11,7 @@ movieRoutes.get('/:id',moviesController.show);
 movieRoutes.put('/:id',authHelpers.loginRequired,moviesController.update);
 movieRoutes.delete('/:id',authHelpers.loginRequired,moviesController.delete);
 
+movieRoutes.post('/:id/fav', authHelpers.loginRequired, moviesController.addFavorite);
+movieRoutes.delete('/:id/fav', authHelpers.loginRequired, moviesController.deleteFavorite);
+
 module.exports=movieRoutes;

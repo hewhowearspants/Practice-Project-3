@@ -65,4 +65,26 @@ movieController.delete=(req,res)=>{
     })
 }
 
+movieController.addFavorite = (req, res) => {
+    Movie.addFavorite(req.body.userId, req.params.id)
+        .then((movie) => {
+            res.json(movie);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+}
+
+movieController.deleteFavorite = (req, res) => {
+    Movie.deleteFavorite(req.body.userId, req.params.id)
+        .then(() => {
+            console.log('deleted!');
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+}
+
 module.exports=movieController;
