@@ -92,6 +92,7 @@ class App extends Component {
         this.setState({
           auth: false,
           currentPage: 'home',
+          loggedIn: false,
         });
       }).catch(err => console.log(err));
   }
@@ -154,15 +155,16 @@ class App extends Component {
           <Route exact path='/movies' render={() => {
               if (this.state.movieDataLoaded) {
                 return (
-                  <MoviesList 
-                  movieData={this.state.movieData} 
+                  <MoviesList
+                  movieData={this.state.movieData}
                   handleMovieSubmit={this.handleMovieSubmit}
-                  handleMovieEditSubmit={this.handleMovieEditSubmit} 
+                  handleMovieEditSubmit={this.handleMovieEditSubmit}
                   selectEditedMovie={this.selectEditedMovie}
-                  currentMovieId={this.state.currentMovieId}/>
+                  currentMovieId={this.state.currentMovieId}
+                  auth={this.state.auth}/>
                 )
               } else return <h1>Loading</h1>
-            } 
+            }
           }/>
           {this.state.fireRedirect ? <Redirect push to={'/movies'} /> : '' }
         {/* {this.decideWhichPage()} */}
