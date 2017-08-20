@@ -11,7 +11,7 @@ const Header = (props) => {
                     <li><Link to='/movies'>Movies</Link></li>
                     {!props.auth ? <li><Link to='/login'>Log In</Link></li> : ''}
                     {!props.auth ? <li><Link to ='/register'>Register</Link></li> : ''}
-                    <li><Link to='/user'>User Dashboard</Link></li>
+                    {props.auth ? <li><Link to='/user'>User Dashboard</Link></li> : ''}
                     {props.auth ? <li onClick={props.logOut}>Logout</li> : '' }
                 </ul>
             </nav>
