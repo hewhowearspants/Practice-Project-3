@@ -40,4 +40,20 @@ Movie.destroy=(id)=>{
     `,[id]);
 }
 
+Movie.showMovieComments=movieid=>{
+    return db.query(`
+    SELECT * FROM comments
+    WHERE movie_id=$1
+    `,[movieid]);
+}
+
+Movie.createComment=(comment,movieid)=>{
+    return db.one(`
+    INSERT INTO comments
+    (text,user_id,movie_id)
+    VALUES($1,$2,$3)
+    RETURNING *
+    `,[comment.text,movieid]);
+}
+
 module.exports=Movie;
