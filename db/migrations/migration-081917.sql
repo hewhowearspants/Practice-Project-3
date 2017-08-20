@@ -19,3 +19,10 @@ CREATE TABLE IF NOT EXISTS favorites (
   movie_id INT REFERENCES movies(id),
   user_id INT REFERENCES users(id)
 );
+
+CREATE TABLE IF NOT EXISTS comments (
+  id SERIAL PRIMARY KEY,
+  text VARCHAR,
+  user_name VARCHAR REFERENCES users(username),
+  movie_id INT REFERENCES movies(id)
+);
