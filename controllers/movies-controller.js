@@ -65,4 +65,25 @@ movieController.delete=(req,res)=>{
     })
 }
 
+movieController.showMovieComments=(req,res)=>{
+    Movie.showMovieComments(req.params.id)
+    .then(comments=>{
+        res.json({
+            message:'ok',
+            data:comments,
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
+
+movieController.createComment=(req,res)=>{
+    Movie.createComment({
+        text:req.body.text,
+        user:req.user.id,
+    },req.params.id);
+}
+
 module.exports=movieController;
