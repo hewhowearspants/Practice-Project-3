@@ -1,5 +1,8 @@
 .App {
   text-align:left;
+}
+
+body{
   background:rgba(57,72,120, 0.2);
 }
 
@@ -16,13 +19,23 @@
 }
 
 .home {
+  display:flex;
   justify-content: center;
-  position: absolute;
-  left: 0; right: 0;
-  bottom: 50%; top: 50%;
   align-items: center;
   text-align: center;
   font-size: 2em;
+  flex-direction: column;
+  font-family:baskerville;
+  line-height: .3em;
+  font-size:42px;
+  color:#303E63;
+  background:white;
+  border:2px solid black;
+  width:80%;
+  margin:0 auto;
+  padding:20px;
+  border:2px solid #C2C7C7;
+  margin-top:140px;
 }
 
 a {
@@ -86,16 +99,17 @@ li:hover {
   margin: 0 auto;
   display: flex;
   flex:1;
+  overflow: auto;
 }
 
 .movie{
   border:2px solid #C2C7C7;
   background:white;
   padding:0px 30px 30px 30px;
-  width:60%;
+  width:80%;
   float: right;
-  margin-top:-300px;
-  margin-bottom: 330px;
+  margin-top:120px;
+  margin-bottom:-90px;
 }
 
 .movie h3{
@@ -138,6 +152,8 @@ footer {
   font-family:baskervile;
   font-size:20px;
   letter-spacing: 0.05em;
+  position:absolute;
+  bottom:0;
 }
 
 .add {
@@ -176,3 +192,75 @@ footer {
 
 } 
 
+.logincontainer{
+  width:80%;
+  margin:0 auto;
+  height:500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logincontainer h1{
+  font-family:baskerville;
+  color:#303E63;
+  font-size:76px;
+  float:left;
+  width:20%;
+  background:rgba(255,255,255,0.6);
+  padding:50px 70px;
+  text-align:right;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding:20px;
+  float:right;
+   width:60%;
+}
+
+.login input[type="text"] {
+  width:80%;
+  height:30px;
+  font-family: 'Oxygen', sans-serif;
+  font-size:18px;
+  padding:10px;
+  margin-bottom:20px;
+}
+
+.login input[type="password"] {
+  width:80%;
+  height:30px;
+  font-family: 'Oxygen', sans-serif;
+  font-size:18px;
+  padding:10px;
+  margin-bottom:20px;
+}
+
+.login input[type="email"] {
+  width:80%;
+  height:30px;
+  font-family: 'Oxygen', sans-serif;
+  font-size:18px;
+  padding:10px;
+  margin-bottom:20px;
+}
+
+.login input[type="submit"] {
+  width:100px;
+  padding:10px;
+  border: 1.5px solid #dedede;
+  font-family: 'Oxygen', sans-serif;
+  font-size:16px;
+  background:white;
+}
+
+.login input[type='submit']:hover{
+   background: #bdbdbd;
+  border: 1.5px solid #bdbdbd;
+  color:#303E63;
+
+} 
