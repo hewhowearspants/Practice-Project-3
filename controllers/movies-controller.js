@@ -65,6 +65,7 @@ movieController.delete=(req,res)=>{
     })
 }
 
+
 movieController.showMovieComments=(req,res)=>{
     Movie.showMovieComments(req.params.id)
     .then(comments=>{
@@ -90,6 +91,28 @@ movieController.createComment=(req,res)=>{
         console.log(err);
         res.status(500).json(err);
     });
+
+movieController.addFavorite = (req, res) => {
+    Movie.addFavorite(req.body.userId, req.params.id)
+        .then((movie) => {
+            res.json(movie);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+}
+
+movieController.deleteFavorite = (req, res) => {
+    Movie.deleteFavorite(req.body.userId, req.params.id)
+        .then(() => {
+            console.log('deleted!');
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+
 }
 
 module.exports=movieController;

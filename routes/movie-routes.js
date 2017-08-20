@@ -13,4 +13,7 @@ movieRoutes.delete('/:id',authHelpers.loginRequired,moviesController.delete);
 movieRoutes.post('/comments/:id',authHelpers.loginRequired,moviesController.createComment);
 movieRoutes.get('/comments/:id',moviesController.showMovieComments);
 
+movieRoutes.post('/:id/fav', authHelpers.loginRequired, moviesController.addFavorite);
+movieRoutes.delete('/:id/fav', authHelpers.loginRequired, moviesController.deleteFavorite);
+
 module.exports=movieRoutes;

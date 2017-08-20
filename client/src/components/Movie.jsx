@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 
 import axios from 'axios';
@@ -48,7 +49,7 @@ class Movie extends Component{
         <h3>{this.props.movie.title}</h3>
         <p>{this.props.movie.description}</p>
         <p>Genre: {this.props.movie.genre}</p>
-        <span className='edit' onClick={() => this.props.selectEditedMovie(this.props.movie.id)}>Edit</span>
+        {this.props.auth ? <span className='edit' onClick={() => this.props.selectEditedMovie(this.props.movie.id)}>Edit</span> : '' }
         <h5>Comments:</h5>
         <CommentAddForm commentData={this.state.commentData} movie={this.props.movie} updatePage={this.updatePage}/>
         <div className='comment-list'>
@@ -59,5 +60,5 @@ class Movie extends Component{
   }
 }
 
-
 export default Movie;
+
