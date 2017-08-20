@@ -47,13 +47,13 @@ Movie.showMovieComments=movieid=>{
     `,[movieid]);
 }
 
-Movie.createComment=(comment,movieid)=>{
+Movie.createComment=(comment,username,movieid)=>{
     return db.one(`
     INSERT INTO comments
-    (text,user_id,movie_id)
+    (text,user_name,movie_id)
     VALUES($1,$2,$3)
     RETURNING *
-    `,[comment.text,movieid]);
+    `,[comment.text,username,movieid]);
 }
 
 module.exports=Movie;
