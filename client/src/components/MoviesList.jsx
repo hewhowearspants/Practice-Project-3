@@ -8,7 +8,7 @@ class MoviesList extends Component {
   render() {
     return (
       <div className="movies-container">
-        <MovieAddForm handleMovieSubmit={this.props.handleMovieSubmit} />
+        {this.props.auth ? <MovieAddForm handleMovieSubmit={this.props.handleMovieSubmit} />  : '' }
         <div className='movies-list'>
           {this.props.movieData.map((movie) => {
             if (this.props.currentMovieId === movie.id) {

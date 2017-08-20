@@ -147,7 +147,7 @@ class App extends Component {
     return (
       <Router>
       <div className="App">
-        <Header setPage={this.setPage} logOut={this.logOut} />
+        <Header setPage={this.setPage} auth={this.state.auth} logOut={this.logOut} />
         <main>
           <Route exact path='/' component={ Home } />
           <Route exact path='/login' render={() => <Login handleLoginSubmit={this.handleLoginSubmit} />} />
