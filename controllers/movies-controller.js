@@ -82,8 +82,14 @@ movieController.showMovieComments=(req,res)=>{
 movieController.createComment=(req,res)=>{
     Movie.createComment({
         text:req.body.text,
-        user:req.user.id,
-    },req.params.id);
+    },req.user.username,req.params.id)
+    .then((comment)=>{
+        res.json(comment);
+    })
+    .catch(err=>{
+        console.log(err);
+        res.status(500).json(err);
+    });
 }
 
 module.exports=movieController;
