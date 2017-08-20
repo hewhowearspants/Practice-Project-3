@@ -40,4 +40,20 @@ Movie.destroy=(id)=>{
     `,[id]);
 }
 
+Movie.addFavorite = (movieId, userId) => {
+    return db.one(`
+        INSERT INTO favorites
+        (movie_id, user_id)
+        VALUES ($1, $2)
+        RETURNING *
+    `, [movieId, userId]);
+}
+
+Movie.deleteFavorite = (movieId, userId) => {
+    return db.none(`
+        DELETE FROM favorites
+        WHERE movie_id = $1 AND user_id = $2
+    `, [movieId, userId]);
+}
+
 module.exports=Movie;
