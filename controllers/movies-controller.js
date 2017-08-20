@@ -30,8 +30,11 @@ movieController.create=(req,res)=>{
         description:req.body.description,
         genre:req.body.genre,
     },req.user.id)
-    .then(()=>{
-        res.redirect('/movies');
+    .then(movie=>{
+        res.json({
+            message:'ok',
+            data:movie,
+        })
     })
     .catch(err=>{
         console.log(err);
@@ -46,7 +49,10 @@ movieController.update=(req,res)=>{
         genre:req.body.genre,
     },req.params.id)
     .then(movie=>{
-        res.redirect(`/movies/${req.params.id}`)
+        res.json({
+            message:'ok',
+            data:movie,
+        })
     })
     .catch(err=>{
         console.log(err);
