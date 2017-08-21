@@ -129,6 +129,8 @@ class App extends Component {
     }).catch((err) => { console.log(err) });
   }
 
+
+
   selectEditedMovie(id) {
     this.setState({
       currentMovieId: id,
@@ -178,7 +180,10 @@ class App extends Component {
                   handleMovieEditSubmit={this.handleMovieEditSubmit}
                   selectEditedMovie={this.selectEditedMovie}
                   currentMovieId={this.state.currentMovieId}
-                  auth={this.state.auth} />
+                  auth={this.state.auth}
+                  userId={this.state.user}
+                  movieId={this.state.movieId}
+                  favMovie={this.favMovie} />
                 )
               } else return <h1>Loading</h1>
             }
