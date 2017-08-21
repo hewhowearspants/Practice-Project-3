@@ -91,6 +91,7 @@ movieController.createComment=(req,res)=>{
         console.log(err);
         res.status(500).json(err);
     });
+}
 
 movieController.addFavorite = (req, res) => {
     Movie.addFavorite(req.body.userId, req.params.id)

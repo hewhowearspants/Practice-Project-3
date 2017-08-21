@@ -9,8 +9,10 @@ class Movie extends Component{
     super(props);
     this.state={
       commentData:null,
+      commentExpand:'collapse',
     }
     this.updatePage=this.updatePage.bind(this);
+    this.expandForm=this.expandForm.bind(this);
   }
 
   componentWillMount(){
@@ -19,6 +21,8 @@ class Movie extends Component{
         let comments=res.data.data.map((comment)=>{
           if(res.data.data.length>0){
             return <p className='single-comment' key={comment.id}>{comment.user_name}: "{comment.text}"</p>
+          }else{
+            return
           }
         })
         this.setState({
@@ -34,6 +38,8 @@ class Movie extends Component{
         let comments=res.data.data.map((comment)=>{
           if(res.data.data.length>0){
             return <p className='single-comment' key={comment.id}>{comment.user_name}: "{comment.text}"</p>
+          }else{
+            return
           }
         })
         this.setState({
@@ -43,6 +49,18 @@ class Movie extends Component{
     .catch(err=>console.log(err));
   }
 
+  expandForm(){
+    if(this.state.commentExpand==='expand'){
+      this.setState({
+        commentExpand:'collapse',
+      })
+    }else if(this.state.commentExpand==='collapse'){
+      this.setState({
+        commentExpand:'expand',
+      })
+    }
+  }
+
   render() {
     return (
       <div className='movie'>
@@ -50,10 +68,14 @@ class Movie extends Component{
         <p>{this.props.movie.description}</p>
         <p>Genre: {this.props.movie.genre}</p>
         {this.props.auth ? <span className='edit' onClick={() => this.props.selectEditedMovie(this.props.movie.id)}>Edit</span> : '' }
-        <h5>Comments:</h5>
-        <CommentAddForm commentData={this.state.commentData} movie={this.props.movie} updatePage={this.updatePage}/>
-        <div className='comment-list'>
-          {this.state.commentData}
+        <span className='edit' onClick={this.expandForm}>See Comments</span>
+        <div className={`comment-box ${this.state.commentExpand}`}>
+          {this.props.auth ? 
+            <CommentAddForm commentData={this.state.commentData} movie={this.props.movie} updatePage={this.updatePage}/>
+          : '' }
+          <div className='comment-list'>
+            {this.state.commentData}
+          </div>
         </div>
       </div>
     )
