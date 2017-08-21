@@ -69,6 +69,10 @@ header {
   justify-content: space-between;
 }
 
+.favorite {
+  background-color: gold;
+}
+
 nav {
   justify-content: flex-end;
 }
