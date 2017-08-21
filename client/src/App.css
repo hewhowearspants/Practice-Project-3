@@ -6,6 +6,10 @@ body{
   background:rgba(57,72,120, 0.2);
 }
 
+.fa-star {
+  cursor: pointer;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -189,8 +193,7 @@ footer {
    background: #bdbdbd;
   border: 1.5px solid #bdbdbd;
   color:#303E63;
-
-} 
+}
 
 .logincontainer{
   width:80%;
@@ -263,7 +266,7 @@ footer {
   border: 1.5px solid #bdbdbd;
   color:#303E63;
 
-} 
+}
 
 .comment-box{
   border-top:2px solid #C2C7C7;
