@@ -27,8 +27,11 @@ class App extends Component {
       movieDataLoaded: false,
       fireRedirect: false,
       movieId: null,
+      favoritedMovies: [],
     }
     this.favMovie = this.favMovie.bind(this);
+    this.unFavMovie = this.unFavMovie.bind(this);
+    this.getUserFaves = this.getUserFaves.bind(this);
     this.setPage = this.setPage.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
@@ -47,6 +50,7 @@ class App extends Component {
           movieDataLoaded: true,
         });
       }).catch(err => console.log(err));
+
   }
 
   setPage(page){
@@ -69,6 +73,7 @@ class App extends Component {
         currentPage: 'home',
         fireRedirect: true,
       });
+      this.getUserFaves(res.data.user.id);
     }).catch(err => console.log(err));
   }
 
@@ -86,6 +91,34 @@ class App extends Component {
         fireRedirect: true,
       });
     }).catch(err => console.log(err));
+  }
+
+  getUserFaves(userId) {
+    console.log(userId)
+    axios.get('/movies/fav', { params: {userId} })
+      .then((res) => {
+        console.log('favorites: ' + JSON.stringify(res.data[0]));
+        const favoritedMovies = res.data.map(element => element.movie_id);
+        const updatedMovies = [...this.state.movieData].map((movie) => {
+          for(let i=0; i<favoritedMovies.length; i++) {
+            if(movie.id === favoritedMovies[i]) {
+              movie.isFavorited = true;
+              return movie;
+            } else {
+              movie.isFavorited = false;
+            };
+          };
+          return movie;
+        });
+        console.log(updatedMovies);
+        this.setState({
+          favoritedMovies: favoritedMovies,
+          movieData: updatedMovies,
+        })
+      }).catch((err) => {
+        console.log(err);
+      })
+      
   }
 
   logOut() {
@@ -130,7 +163,6 @@ class App extends Component {
   }
 
 
-
   selectEditedMovie(id) {
     this.setState({
       currentMovieId: id,
@@ -147,19 +179,33 @@ class App extends Component {
       }).catch((err) => { console.log(err) });
   }
 
+  favoritesHandler(movieId, userId) {
+    console.log(this.state.movieData)
+    const updatedMovies = [...this.state.movieData];
+    updatedMovies.find((movie) => { return movie.id === movieId })
+  }
+
   favMovie(movieId, userId) {
-    console.log(this.state.user);
+    console.log(movieId, userId);
     axios.post(`/movies/${movieId}/fav`, {
-          movieId,
-          userId,
-        }).then((res) => {
-          this.resetMovies();
-        }).then(() => {
-          this.setState({
-            fireRedirect: true,
-          })
-        }).catch((err) => { console.log(err) });
-      }
+        userId,
+      }).then((res) => {
+        console.log('fav\'d!');
+        this.getUserFaves(userId);
+      }).catch((err) => { console.log(err) });
+  }
+
+  unFavMovie(movieId, userId) {
+    console.log('deleting! ' + movieId + ' ' + userId);
+    axios.delete(`/movies/${movieId}/fav`, {
+        params: { userId, }
+      }).then(() => {
+        console.log('un-fav\'d');
+        this.getUserFaves(userId);
+      }).catch((err) => {
+        console.log(err);
+      });
+  }
 
 
   render() {
@@ -181,9 +227,10 @@ class App extends Component {
                   selectEditedMovie={this.selectEditedMovie}
                   currentMovieId={this.state.currentMovieId}
                   auth={this.state.auth}
-                  userId={this.state.user}
+                  user={this.state.user}
                   movieId={this.state.movieId}
-                  favMovie={this.favMovie} />
+                  favMovie={this.favMovie}
+                  unFavMovie={this.unFavMovie} />
                 )
               } else return <h1>Loading</h1>
             }

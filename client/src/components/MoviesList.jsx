@@ -13,7 +13,7 @@ class MoviesList extends Component {
           {this.props.movieData.map((movie) => {
             if (this.props.currentMovieId === movie.id) {
               return <MovieEditForm key={movie.id} movie={movie} handleMovieEditSubmit={this.props.handleMovieEditSubmit} />
-            } else return <Movie favMovie={this.props.favMovie} userId={this.props.userId} movieId={this.props.movieId} auth={this.props.auth} key={movie.id} movie={movie} selectEditedMovie={this.props.selectEditedMovie} />
+            } else return <Movie favMovie={this.props.favMovie} unFavMovie={this.props.unFavMovie} user={this.props.user} movieId={this.props.movieId} auth={this.props.auth} key={movie.id} movie={movie} selectEditedMovie={this.props.selectEditedMovie} />
           })}
         </div>
       </div>

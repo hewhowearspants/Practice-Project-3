@@ -93,8 +93,19 @@ movieController.createComment=(req,res)=>{
     });
 }
 
+movieController.getFavorites = (req, res) => {
+    Movie.getFavorites(req.query.userId)
+        .then((movies) => {
+            res.json(movies)
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+}
+
 movieController.addFavorite = (req, res) => {
-    Movie.addFavorite(req.body.userId, req.params.id)
+    Movie.addFavorite(req.params.id, req.body.userId)
         .then((movie) => {
             res.json(movie);
         })
@@ -105,7 +116,7 @@ movieController.addFavorite = (req, res) => {
 }
 
 movieController.deleteFavorite = (req, res) => {
-    Movie.deleteFavorite(req.body.userId, req.params.id)
+    Movie.deleteFavorite(req.params.id, req.query.userId)
         .then(() => {
             console.log('deleted!');
         })

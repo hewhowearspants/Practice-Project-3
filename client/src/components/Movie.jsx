@@ -21,7 +21,7 @@ class Movie extends Component{
           if(res.data.data.length>0){
             return <p className='single-comment' key={comment.id}>{comment.user_name}: "{comment.text}"</p>
           }else{
-            return
+            return '';
           }
         })
         this.setState({
@@ -38,7 +38,7 @@ class Movie extends Component{
           if(res.data.data.length>0){
             return <p className='single-comment' key={comment.id}>{comment.user_name}: "{comment.text}"</p>
           }else{
-            return
+            return '';
           }
         })
         this.setState({
@@ -62,9 +62,14 @@ class Movie extends Component{
 
   render() {
     return (
-      <div className='movie'>
-      {this.props.auth ? <div className={`my-movie ${this.props.movieId === this.props.movie.id ? 'movieId' : ''}`}>
-          <i onClick={() => this.props.favMovie(this.props.movie.id)} className="fa fa-star fa-2x" />
+      <div className={`movie ${this.props.movie.isFavorited ? 'favorite' : ''}`}>
+      {this.props.auth ? <div className='fav-movie'>
+          <i onClick={() => {
+            if (this.props.movie.isFavorited) {
+              this.props.unFavMovie(this.props.movie.id, this.props.user.id)
+            } else {
+              this.props.favMovie(this.props.movie.id, this.props.user.id)
+            }}} className={`fa fa-star${this.props.movie.isFavorited ? '-o' : ''} fa-2x`} />
         </div> : '' }
         <h3>{this.props.movie.title}</h3>
         <p>{this.props.movie.description}</p>
