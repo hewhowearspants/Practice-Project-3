@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 
 import axios from 'axios';
@@ -64,13 +63,16 @@ class Movie extends Component{
   render() {
     return (
       <div className='movie'>
+      {this.props.auth ? <div className={`my-movie ${this.props.movieId === this.props.movie.id ? 'movieId' : ''}`}>
+          <i onClick={() => this.props.favMovie(this.props.movie.id)} className="fa fa-star fa-2x" />
+        </div> : '' }
         <h3>{this.props.movie.title}</h3>
         <p>{this.props.movie.description}</p>
         <p>Genre: {this.props.movie.genre}</p>
         {this.props.auth ? <span className='edit' onClick={() => this.props.selectEditedMovie(this.props.movie.id)}>Edit</span> : '' }
         <span className='edit' onClick={this.expandForm}>See Comments</span>
         <div className={`comment-box ${this.state.commentExpand}`}>
-          {this.props.auth ? 
+          {this.props.auth ?
             <CommentAddForm commentData={this.state.commentData} movie={this.props.movie} updatePage={this.updatePage}/>
           : '' }
           <div className='comment-list'>
@@ -83,4 +85,3 @@ class Movie extends Component{
 }
 
 export default Movie;
-
