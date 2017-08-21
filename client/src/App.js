@@ -236,7 +236,6 @@ class App extends Component {
             }
           }/>
           {this.state.fireRedirect ? <Redirect push to={'/movies'} /> : '' }
-        {/* {this.decideWhichPage()} */}
         </main>
         <Footer />
       </div>
