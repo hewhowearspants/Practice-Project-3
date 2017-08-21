@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 import React, { Component } from 'react';
 
 import axios from 'axios';
@@ -65,9 +63,9 @@ class Movie extends Component{
   render() {
     return (
       <div className='movie'>
-      <div className={`my-movie ${props.movieId === props.movie.id ? 'movieId' : ''}`}>
-        <i onClick={() => props.favMovie(props.movie.id)} className="fa fa-star fa-2x" />
-      </div>
+      {props.auth ? <div className={`my-movie ${props.movieId === props.movie.id ? 'movieId' : ''}`}>
+          <i onClick={() => props.favMovie(props.movie.id)} className="fa fa-star fa-2x" />
+        </div> : '' }
         <h3>{this.props.movie.title}</h3>
         <p>{this.props.movie.description}</p>
         <p>Genre: {this.props.movie.genre}</p>
