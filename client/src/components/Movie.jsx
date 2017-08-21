@@ -21,7 +21,7 @@ class Movie extends Component{
           if(res.data.data.length>0){
             return <p className='single-comment' key={comment.id}>{comment.user_name}: "{comment.text}"</p>
           }else{
-            return
+            return '';
           }
         })
         this.setState({
@@ -38,7 +38,7 @@ class Movie extends Component{
           if(res.data.data.length>0){
             return <p className='single-comment' key={comment.id}>{comment.user_name}: "{comment.text}"</p>
           }else{
-            return
+            return '';
           }
         })
         this.setState({
