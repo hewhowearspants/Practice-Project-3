@@ -26,6 +26,7 @@ class App extends Component {
       movieData: null,
       movieDataLoaded: false,
       fireRedirect: false,
+      movieId: null,
     }
     this.setPage = this.setPage.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
@@ -93,7 +94,6 @@ class App extends Component {
         this.setState({
           auth: false,
           currentPage: 'home',
-          loggedIn: false,
         });
       }).catch(err => console.log(err));
   }
@@ -144,6 +144,21 @@ class App extends Component {
       }).catch((err) => { console.log(err) });
   }
 
+  favMovie(movieId, userId) {
+    console.log(this.state.user);
+    axios.post(`/movies/${movieId}/fav`, {
+          movieId,
+          userId,
+        }).then((res) => {
+          this.resetMovies();
+        }).then(() => {
+          this.setState({
+            fireRedirect: true,
+          })
+        }).catch((err) => { console.log(err) });
+      }
+
+
   render() {
     return (
       <Router>
@@ -162,12 +177,13 @@ class App extends Component {
                   handleMovieEditSubmit={this.handleMovieEditSubmit}
                   selectEditedMovie={this.selectEditedMovie}
                   currentMovieId={this.state.currentMovieId}
-                  auth={this.state.auth}/>
+                  auth={this.state.auth}
                 )
               } else return <h1>Loading</h1>
             }
           }/>
           {this.state.fireRedirect ? <Redirect push to={'/movies'} /> : '' }
+        {/* {this.decideWhichPage()} */}
         </main>
         <Footer />
       </div>
