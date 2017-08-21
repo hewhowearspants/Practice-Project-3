@@ -28,6 +28,7 @@ class App extends Component {
       fireRedirect: false,
       movieId: null,
     }
+    this.favMovie = this.favMovie.bind(this);
     this.setPage = this.setPage.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
@@ -177,7 +178,7 @@ class App extends Component {
                   handleMovieEditSubmit={this.handleMovieEditSubmit}
                   selectEditedMovie={this.selectEditedMovie}
                   currentMovieId={this.state.currentMovieId}
-                  auth={this.state.auth}
+                  auth={this.state.auth} />
                 )
               } else return <h1>Loading</h1>
             }
