@@ -63,8 +63,8 @@ class Movie extends Component{
   render() {
     return (
       <div className='movie'>
-      {props.auth ? <div className={`my-movie ${props.movieId === props.movie.id ? 'movieId' : ''}`}>
-          <i onClick={() => props.favMovie(props.movie.id)} className="fa fa-star fa-2x" />
+      {this.props.auth ? <div className={`my-movie ${this.props.movieId === this.props.movie.id ? 'movieId' : ''}`}>
+          <i onClick={() => this.props.favMovie(this.props.movie.id)} className="fa fa-star fa-2x" />
         </div> : '' }
         <h3>{this.props.movie.title}</h3>
         <p>{this.props.movie.description}</p>
