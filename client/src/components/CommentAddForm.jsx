@@ -30,9 +30,9 @@ class CommentAddForm extends Component{
 
     render(){
         return(
-            <form onSubmit={(event)=>this.handleCommentSubmit(event,this.state.text)}>
-                <input type='text' value={this.state.text} onChange={this.handleInputChange}/>
-                <input type='submit' />
+            <form className='comment-submit' onSubmit={(event)=>this.handleCommentSubmit(event,this.state.text)}>
+                <textarea className='comment-text' type='text' value={this.state.text} onChange={this.handleInputChange}/>
+                <input className='comment-btn' type='submit' />
             </form>
         )
     }
