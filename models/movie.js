@@ -55,6 +55,7 @@ Movie.createComment=(comment,username,movieid)=>{
     VALUES($1,$2,$3)
     RETURNING *
     `,[comment.text,username,movieid]);
+}
 
 Movie.addFavorite = (movieId, userId) => {
     return db.one(`
