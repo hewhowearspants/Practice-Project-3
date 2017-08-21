@@ -57,6 +57,13 @@ Movie.createComment=(comment,username,movieid)=>{
     `,[comment.text,username,movieid]);
 }
 
+Movie.getFavorites = (userId) => {
+    return db.query(`
+        SELECT * FROM favorites
+        WHERE user_id = $1
+    `, [userId]);
+}
+
 Movie.addFavorite = (movieId, userId) => {
     return db.one(`
         INSERT INTO favorites
